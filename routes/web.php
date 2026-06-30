@@ -22,10 +22,15 @@ Route::get('/migrate', function () {
 
 Route::get('/seed', function () {
     try {
+        $tables = [];
+        foreach (\Illuminate\Support\Facades\DB::select('SHOW TABLES') as $row) {
+            $rowArray = (array) $row;
+            $tables[] = reset($rowArray);
+        }
+
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
-        foreach (\Illuminate\Support\Facades\Schema::getAllTables() as $table) {
-            $tableName = reset($table);
-            \Illuminate\Support\Facades\Schema::dropIfExists($tableName);
+        foreach ($tables as $table) {
+            \Illuminate\Support\Facades\Schema::dropIfExists($table);
         }
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
