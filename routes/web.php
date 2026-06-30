@@ -11,6 +11,15 @@ Route::get('/', function () {
     return view('welcome', compact('tempatKuliners'));
 });
 
+Route::get('/migrate', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return 'Migrations completed successfully. <a href="/">Go to Home</a>';
+    } catch (\Exception $e) {
+        return 'Error during migration: ' . $e->getMessage();
+    }
+});
+
 Route::get('/tempat-kuliner/{id}', function ($id) {
     $kuliner = TempatKuliner::findOrFail($id);
     return view('detail', compact('kuliner'));
