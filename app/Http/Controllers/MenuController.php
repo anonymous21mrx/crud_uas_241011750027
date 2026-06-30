@@ -37,7 +37,10 @@ class MenuController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('menus', 'public');
+            $file = $request->file('gambar');
+            $extension = $file->getClientOriginalExtension();
+            $base64 = base64_encode(file_get_contents($file));
+            $data['gambar'] = 'data:image/' . $extension . ';base64,' . $base64;
         }
 
         Menu::create($data);
@@ -71,10 +74,10 @@ class MenuController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('gambar')) {
-            if ($menu->gambar) {
-                Storage::disk('public')->delete($menu->gambar);
-            }
-            $data['gambar'] = $request->file('gambar')->store('menus', 'public');
+            $file = $request->file('gambar');
+            $extension = $file->getClientOriginalExtension();
+            $base64 = base64_encode(file_get_contents($file));
+            $data['gambar'] = 'data:image/' . $extension . ';base64,' . $base64;
         }
 
         $menu->update($data);

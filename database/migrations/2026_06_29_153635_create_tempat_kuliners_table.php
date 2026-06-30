@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tempat_kuliners', function (Blueprint $table) {
             $table->id();
-            $table->string('gambar')->nullable();
+            $table->longText('gambar')->nullable();
             $table->string('nama_tempat');
             $table->text('alamat');
             $table->string('jenis_makanan');

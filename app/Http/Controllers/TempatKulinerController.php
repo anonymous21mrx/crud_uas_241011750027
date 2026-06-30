@@ -31,8 +31,10 @@ class TempatKulinerController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('gambar_kuliner', 'public');
-            $validated['gambar'] = $path;
+            $file = $request->file('gambar');
+            $extension = $file->getClientOriginalExtension();
+            $base64 = base64_encode(file_get_contents($file));
+            $validated['gambar'] = 'data:image/' . $extension . ';base64,' . $base64;
         }
 
         TempatKuliner::create($validated);
@@ -56,11 +58,11 @@ class TempatKulinerController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            if ($tempatKuliner->gambar) {
-                Storage::disk('public')->delete($tempatKuliner->gambar);
-            }
-            $path = $request->file('gambar')->store('gambar_kuliner', 'public');
-            $validated['gambar'] = $path;
+            // Kita tidak perlu menghapus file lokal karena di Vercel semua tersimpan sebagai base64 string di database
+            $file = $request->file('gambar');
+            $extension = $file->getClientOriginalExtension();
+            $base64 = base64_encode(file_get_contents($file));
+            $validated['gambar'] = 'data:image/' . $extension . ';base64,' . $base64;
         }
 
         $tempatKuliner->update($validated);
