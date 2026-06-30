@@ -20,27 +20,10 @@ class TelagaBestariSeeder extends Seeder
         TempatKuliner::query()->delete();
         
         $downloadImage = function($keyword, $folder, $seedText) {
-            try {
-                // Gunakan Picsum karena sangat stabil dan cepat untuk gambar random (berdasarkan seed agar konsisten namun unik)
-                $seed = md5($seedText . rand(1, 1000));
-                $url = "https://picsum.photos/seed/{$seed}/800/600";
-                
-                $ctx = stream_context_create(['http' => ['timeout' => 8]]);
-                $contents = @file_get_contents($url, false, $ctx);
-                
-                if (!$contents) {
-                    // Fallback jika picsum gagal
-                    $url = "https://placehold.co/800x600/png?text=" . urlencode(substr($seedText, 0, 20));
-                    $contents = @file_get_contents($url, false, $ctx);
-                }
-                
-                if ($contents) {
-                    $filename = $folder . '/' . Str::random(10) . '.jpg';
-                    Storage::disk('public')->put($filename, $contents);
-                    return $filename;
-                }
-            } catch (\Exception $e) {}
-            return null;
+            // Karena Vercel tidak bisa melayani file statis yang diunduh ke /tmp, 
+            // kita simpan URL eksternalnya saja langsung ke database.
+            $seed = md5($seedText . rand(1, 1000));
+            return "https://picsum.photos/seed/{$seed}/800/600";
         };
 
         $data = [

@@ -48,7 +48,7 @@
             @forelse($tempatKuliners as $kuliner)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition duration-300 flex flex-col">
                     @if($kuliner->gambar)
-                        <img src="{{ Storage::url($kuliner->gambar) }}" alt="{{ $kuliner->nama_tempat }}" class="w-full h-56 object-cover">
+                        <img src="{{ str_starts_with($kuliner->gambar, 'http') ? $kuliner->gambar : Storage::url($kuliner->gambar) }}" alt="{{ $kuliner->nama_tempat }}" class="w-full h-56 object-cover">
                     @else
                         <div class="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">No Image</div>
                     @endif

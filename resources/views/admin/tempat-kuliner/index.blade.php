@@ -35,7 +35,7 @@
                         <td>{{ $index + 1 }}</td>
                         <td>
                             @if($item->gambar)
-                                <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->nama_tempat }}" width="80" class="img-thumbnail">
+                                <img src="{{ str_starts_with($item->gambar, 'http') ? $item->gambar : Storage::url($item->gambar) }}" alt="{{ $item->nama_tempat }}" width="80" class="img-thumbnail">
                             @else
                                 <span class="text-muted">No Image</span>
                             @endif
