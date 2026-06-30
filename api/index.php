@@ -12,9 +12,7 @@ if (!is_dir($compiledViewPath)) {
     mkdir('/tmp/storage/logs', 0777, true);
 }
 
-// Paksa Laravel menggunakan /tmp dan aktifkan mode debug
-$_ENV['APP_DEBUG'] = 'true';
-putenv('APP_DEBUG=true');
+// Paksa Laravel menggunakan /tmp
 $_ENV['APP_CONFIG_CACHE'] = '/tmp/config.php';
 $_ENV['APP_ROUTES_CACHE'] = '/tmp/routes.php';
 $_ENV['APP_SERVICES_CACHE'] = '/tmp/services.php';
