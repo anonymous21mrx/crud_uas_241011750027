@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('welcome', compact('tempatKuliners'));
 });
 
+// Hapus komentar di bawah ini hanya jika Anda ingin melakukan migrasi/seed ulang database (HATI-HATI: /seed akan menghapus semua data yang diinput manual!)
+/*
 Route::get('/migrate', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
@@ -40,6 +42,7 @@ Route::get('/seed', function () {
         return 'Error during seeding: ' . $e->getMessage();
     }
 });
+*/
 
 Route::get('/tempat-kuliner/{id}', function ($id) {
     $kuliner = TempatKuliner::findOrFail($id);
