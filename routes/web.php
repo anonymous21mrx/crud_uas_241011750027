@@ -20,6 +20,15 @@ Route::get('/migrate', function () {
     }
 });
 
+Route::get('/seed', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return 'Database seeding completed successfully. <a href="/">Go to Home</a>';
+    } catch (\Exception $e) {
+        return 'Error during seeding: ' . $e->getMessage();
+    }
+});
+
 Route::get('/tempat-kuliner/{id}', function ($id) {
     $kuliner = TempatKuliner::findOrFail($id);
     return view('detail', compact('kuliner'));
