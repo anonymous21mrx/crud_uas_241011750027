@@ -60,10 +60,10 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => (env('MYSQL_ATTR_SSL_CA') === true || env('MYSQL_ATTR_SSL_CA') === '1' || env('VERCEL'))
-                    ? '/dev/null' 
+                PDO::MYSQL_ATTR_SSL_CA => env('VERCEL') || env('MYSQL_ATTR_SSL_CA') 
+                    ? base_path('ca.pem') 
                     : env('MYSQL_ATTR_SSL_CA'),
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
             ]) : [],
         ],
 
@@ -83,10 +83,10 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => (env('MYSQL_ATTR_SSL_CA') === true || env('MYSQL_ATTR_SSL_CA') === '1' || env('VERCEL'))
-                    ? '/dev/null' 
+                PDO::MYSQL_ATTR_SSL_CA => env('VERCEL') || env('MYSQL_ATTR_SSL_CA') 
+                    ? base_path('ca.pem') 
                     : env('MYSQL_ATTR_SSL_CA'),
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
             ]) : [],
         ],
 
