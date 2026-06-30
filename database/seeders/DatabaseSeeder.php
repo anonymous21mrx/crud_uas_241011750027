@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => 'admin123',
         ]);
+
+        $this->call(TelagaBestariSeeder::class);
     }
 }
