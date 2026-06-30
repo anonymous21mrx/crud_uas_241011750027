@@ -60,7 +60,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA') === 'true' || env('MYSQL_ATTR_SSL_CA') === '1' 
+                PDO::MYSQL_ATTR_SSL_CA => (env('MYSQL_ATTR_SSL_CA') === true || env('MYSQL_ATTR_SSL_CA') === '1' || env('VERCEL'))
                     ? '/etc/ssl/certs/ca-certificates.crt' 
                     : env('MYSQL_ATTR_SSL_CA'),
                 PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
@@ -83,7 +83,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA') === 'true' || env('MYSQL_ATTR_SSL_CA') === '1' 
+                PDO::MYSQL_ATTR_SSL_CA => (env('MYSQL_ATTR_SSL_CA') === true || env('MYSQL_ATTR_SSL_CA') === '1' || env('VERCEL'))
                     ? '/etc/ssl/certs/ca-certificates.crt' 
                     : env('MYSQL_ATTR_SSL_CA'),
                 PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
