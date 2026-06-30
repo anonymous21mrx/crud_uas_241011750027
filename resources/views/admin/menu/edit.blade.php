@@ -55,7 +55,7 @@
                 <label for="gambar" class="form-label">Gambar Menu</label>
                 @if($menu->gambar)
                     <div class="mb-2">
-                        <img src="{{ Storage::url($menu->gambar) }}" alt="Gambar Menu" width="100" class="img-thumbnail">
+                        <img src="{{ (str_starts_with($menu->gambar, 'http') || str_starts_with($menu->gambar, 'data:image')) ? $menu->gambar : Storage::url($menu->gambar) }}" alt="Gambar Menu" width="100" class="img-thumbnail">
                     </div>
                 @endif
                 <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*">

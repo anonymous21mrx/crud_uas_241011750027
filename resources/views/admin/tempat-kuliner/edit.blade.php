@@ -30,7 +30,7 @@
                 <label for="gambar" class="form-label">Gambar (Biarkan kosong jika tidak ingin mengubah)</label>
                 @if($tempatKuliner->gambar)
                     <div class="mb-2">
-                        <img src="{{ Storage::url($tempatKuliner->gambar) }}" alt="Preview" class="img-thumbnail" width="150">
+                        <img src="{{ (str_starts_with($tempatKuliner->gambar, 'http') || str_starts_with($tempatKuliner->gambar, 'data:image')) ? $tempatKuliner->gambar : Storage::url($tempatKuliner->gambar) }}" alt="Preview" class="img-thumbnail" width="150">
                     </div>
                 @endif
                 <input class="form-control" type="file" id="gambar" name="gambar" accept="image/*">

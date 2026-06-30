@@ -35,7 +35,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             @if($kuliner->gambar)
-                <img src="{{ str_starts_with($kuliner->gambar, 'http') ? $kuliner->gambar : Storage::url($kuliner->gambar) }}" alt="{{ $kuliner->nama_tempat }}" class="w-full h-80 object-cover">
+                <img src="{{ (str_starts_with($kuliner->gambar, 'http') || str_starts_with($kuliner->gambar, 'data:image')) ? $kuliner->gambar : Storage::url($kuliner->gambar) }}" alt="{{ $kuliner->nama_tempat }}" class="w-full h-80 object-cover">
             @else
                 <div class="w-full h-80 bg-gray-200 flex items-center justify-center text-gray-500 text-lg">No Image</div>
             @endif
@@ -68,7 +68,7 @@
                             @foreach($kuliner->menus as $menu)
                             <div class="flex-none w-64 bg-gray-50 rounded-lg p-4 border border-gray-100 shadow-sm flex flex-col h-full snap-start">
                                 @if($menu->gambar)
-                                    <img src="{{ str_starts_with($menu->gambar, 'http') ? $menu->gambar : Storage::url($menu->gambar) }}" alt="{{ $menu->nama_menu }}" class="w-full h-32 object-cover rounded-md mb-3">
+                                    <img src="{{ (str_starts_with($menu->gambar, 'http') || str_starts_with($menu->gambar, 'data:image')) ? $menu->gambar : Storage::url($menu->gambar) }}" alt="{{ $menu->nama_menu }}" class="w-full h-32 object-cover rounded-md mb-3">
                                 @endif
                                 <div class="flex-grow">
                                     <h4 class="font-bold text-gray-900">{{ $menu->nama_menu }}</h4>
